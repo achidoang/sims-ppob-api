@@ -8,6 +8,7 @@ app.use(express.json());
 
 const db = require('./models/db');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 app.get('/test-db', async (req, res) => {
   try {
@@ -23,7 +24,11 @@ app.get('/', (req, res) => {
   res.send('Selamat datang SIMS PPOB API');
 });
 
-app.use('/', authRoutes); 
+app.use('/', authRoutes); // Tambahkan route auth
+app.use('/', userRoutes); // Tambahkan route user
+app.use('/uploads', express.static('uploads')); // Untuk mengakses file upload
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
