@@ -18,8 +18,8 @@ const authenticateToken = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
         if (err) {
             return res.status(403).json({
-                status: 403,
-                message: 'Token tidak valid',
+                status: 108,
+                message: 'Token tidak tidak valid atau kadaluwarsa',
                 data: null
             });
         }
