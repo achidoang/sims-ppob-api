@@ -94,9 +94,9 @@ JWT_SECRET=your-secret-key
 
 ## 🚀 Deployment
 
-API ini dideploy menggunakan **Railway**:
+API ini dideploy menggunakan **Vercel**:
 
-🌐 **Live URL:** https://`<your-railway-app>`.railway.app/
+🌐 **Live URL:** https://sims-ppob-api.vercel.app/
 
 ## 📋 Cara Menjalankan Proyek
 
