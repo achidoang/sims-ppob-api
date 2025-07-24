@@ -1,3 +1,4 @@
+// middlewares/uploadMiddleware.js
 const multer = require('multer');
 const path = require('path');
 
@@ -13,16 +14,23 @@ const storage = multer.diskStorage({
     }
 });
 
-// filter hanya gambar yang diizinkan
+// filter hanya gambar yang diizinkan (hanya jpeg dan png sesuai dokumentasi)
 const fileFilter = (req, file, cb) => {
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    const allowedTypes = ['image/jpeg', 'image/png'];
     if (allowedTypes.includes(file.mimetype)) {
         cb(null, true); // file diterima
     } else {
-        cb(new Error('Hanya file jpg/jpeg/png yang diperbolehkan'), false); // file ditolak
+        // Tidak throw error, biarkan controller yang handle
+        cb(null, false);
     }
 };
 
-const upload = multer({ storage, fileFilter });
+const upload = multer({ 
+    storage, 
+    fileFilter,
+    limits: {
+        fileSize: 5 * 1024 * 1024 // limit 5MB (opsional)
+    }
+});
 
 module.exports = upload;

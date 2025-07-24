@@ -76,8 +76,14 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
     const schema = Joi.object({
-        email: Joi.string().email().required(),
-        password: Joi.string().min(8).required()
+        email: Joi.string().email().required().messages({
+            'string.email': 'Paramter email tidak sesuai format',
+            'any.required': 'Email harus diisi'
+        }),
+        password: Joi.string().min(8).required().messages({
+            'string.min': 'Password minimal 8 karakter',
+            'any.required': 'Password harus diisi'
+        })
     });
 
     const { error } = schema.validate(req.body);
@@ -114,18 +120,18 @@ const loginUser = async (req, res) => {
             });
         }
 
-        // buat token
+        // buat token dengan payload email dan expiration 12 jam
         const token = jwt.sign(
             { email: user.email },
             process.env.JWT_SECRET,
-            {expiresIn: '12h'}
+            { expiresIn: '12h' }
         );
 
-        // response sukses
+        // response sukses sesuai dokumentasi
         return res.status(200).json({
             status: 0,
-            message: 'Login sukses',
-            data: { token}
+            message: 'Login Sukses',
+            data: { token }
         });
     } catch (err) {
         console.error(err);
@@ -136,6 +142,5 @@ const loginUser = async (req, res) => {
         });
     }
 };
-
 
 module.exports = { registerUser, loginUser };

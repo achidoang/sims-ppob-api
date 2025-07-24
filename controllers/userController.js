@@ -17,7 +17,12 @@ const getProfile = async (req, res) => {
     return res.status(200).json({
         status: 0,
         message: 'Sukses',
-        data: user
+        data: {
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            profile_image: user.profile_image || `https://yoururlapi.com/profile.jpeg`,
+        }
     });
     } catch (err) {
         console.error(err);
@@ -129,8 +134,8 @@ const updateProfileImage = async (req, res) => {
         });
     }
 
-    // Validasi format file (tambahan validasi)
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    // Validasi format file (hanya jpeg dan png sesuai dokumentasi)
+    const allowedTypes = ['image/jpeg', 'image/png'];
     if (!allowedTypes.includes(req.file.mimetype)) {
         return res.status(400).json({
             status: 102,
@@ -139,6 +144,7 @@ const updateProfileImage = async (req, res) => {
         });
     }
 
+    // Buat URL lengkap untuk profile image
     const imagePath = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
 
     try {
@@ -164,7 +170,7 @@ const updateProfileImage = async (req, res) => {
 
         const userData = userResult.rows[0];
 
-        // Response sukses dengan data user
+        // Response sukses dengan data user sesuai dokumentasi
         return res.status(200).json({
             status: 0,
             message: 'Update Profile Image berhasil',
@@ -185,6 +191,7 @@ const updateProfileImage = async (req, res) => {
         });
     }
 };
+
 
 const getBalance = async (req, res) => {
     const email = req.user.email; // Ambil email dari token yang sudah di-decode
