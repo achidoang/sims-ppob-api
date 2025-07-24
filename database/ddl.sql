@@ -1,3 +1,5 @@
+-- database
+
 -- users table
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -36,5 +38,5 @@ CREATE TABLE IF NOT EXISTS transactions (
     description TEXT,
     service_code VARCHAR(50),
     total_amount INTEGER NOT NULL,
-    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 );

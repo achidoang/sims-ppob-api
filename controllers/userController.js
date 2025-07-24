@@ -186,5 +186,37 @@ const updateProfileImage = async (req, res) => {
     }
 };
 
+const getBalance = async (req, res) => {
+    const email = req.user.email; // Ambil email dari token yang sudah di-decode
 
-module.exports = { getProfile, updateProfile, updateProfileImage };
+    try {
+        const result = await db.query(
+            'SELECT balance FROM users WHERE email = $1',
+            [email]
+        );
+        const user = result.rows[0];
+
+        return res.status(200).json({
+            status: 0,
+            message: 'Get Balance Berhasil',
+            data: {
+                balance: user.balance || 0 // Jika balance tidak ada, default ke 0
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({
+            status: 500,
+            message: 'Server error',
+            data: null
+        });
+    }
+}
+
+
+module.exports = { 
+    getProfile, 
+    updateProfile, 
+    updateProfileImage,
+    getBalance
+};

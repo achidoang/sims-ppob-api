@@ -11,6 +11,8 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const bannerRoutes = require('./routes/bannerRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
+const topupRoutes = require('./routes/topupRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
 
 app.get('/test-db', async (req, res) => {
   try {
@@ -31,6 +33,8 @@ app.use('/', userRoutes); // Tambahkan route user
 app.use('/uploads', express.static('uploads')); // Untuk mengakses file upload
 app.use('/', bannerRoutes); // Tambahkan route banner
 app.use('/', serviceRoutes); // Tambahkan route service
+app.use('/', topupRoutes); // Tambahkan route topup
+app.use('/', transactionRoutes); // Tambahkan route transaction
 
 
 
