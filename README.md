@@ -3,7 +3,10 @@
 Proyek ini dikembangkan sebagai bagian dari **Take Home Test** untuk posisi **Node.js Programmer (Express.js)**. REST API ini dibangun berdasarkan **Kontrak API (Swagger)** yang telah ditentukan oleh tim Nutech Integrasi.
 
 📄 **Dokumentasi API (Swagger)**:  
+Seluruh spesifikasi API tersedia di:
 https://api-doc-tht.nutech-integrasi.com/
+
+Gunakan dokumentasi ini untuk melakukan testing dan validasi API secara end-to-end.
 
 ---
 
@@ -36,23 +39,26 @@ https://api-doc-tht.nutech-integrasi.com/
 
 ---
 
+# SIMS PPOB API
+
 ## 📂 Project Structure
 
+```
 sims-ppob-api/
-├── controllers/ # Business logic (controller functions)
-├── middlewares/ # JWT auth, upload handler, validation
-├── models/ # Database connection & query helpers
-├── routes/ # API route declarations
-├── uploads/ # Folder penyimpanan file upload
-├── utils/ # Helper utilities
-├── database/ddl.sql # Database schema (DDL)
-├── .env.example # Environment variables template
-├── app.js # Entry point Express
-├── package.json
-└── README.md
+├── controllers/          # Business logic (controller functions)
+├── middlewares/          # JWT auth, upload handler, validation
+├── models/               # Database connection & query helpers
+├── routes/               # API route declarations
+├── uploads/              # Folder penyimpanan file upload
+├── utils/                # Helper utilities
+├── database/
+│   └── ddl.sql          # Database schema (DDL)
+├── .env.example         # Environment variables template
+├── app.js               # Entry point Express
+├── package.json         # Project dependencies
+└── README.md            # Project documentation
+```
 
-
----
 
 ## 🗄️ Database Schema
 
@@ -68,42 +74,69 @@ Berisi DDL untuk tabel:
 
 ---
 
-## ⚙️ Environment Variables
+## ⚙️ Configuration
 
-Konfigurasi disimpan di file `.env`. Template tersedia di:
-.env.example
+### Environment Variables
 
-
-Contoh konfigurasi:
+Salin file `.env.example` menjadi `.env` dan sesuaikan konfigurasi:
 
 ```env
 PORT=3000
 DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
 JWT_SECRET=your-secret-key
+```
 
-🚀 Deployment URL
-API ini dideploy menggunakan Railway:
-https://<your-railway-app>.railway.app/
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `PORT` | Port server aplikasi | `3000` |
+| `DATABASE_URL` | Connection string database | `postgresql://user:pass@localhost:5432/sims_ppob` |
+| `JWT_SECRET` | Secret key untuk JWT token | `your-super-secret-key` |
 
-📋 Cara Menjalankan Proyek
-1. Clone repository:
-git clone https://github.com/<username>/sims-ppob-api.git
-cd sims-ppob-api
+## 🚀 Deployment
 
-2.  Install dependencies:
-npm install
+API ini dideploy menggunakan **Railway**:
 
-3. Salin file .env.example menjadi .env lalu sesuaikan:
-cp .env.example .env
+🌐 **Live URL:** https://`<your-railway-app>`.railway.app/
 
+## 📋 Cara Menjalankan Proyek
 
-Jalankan aplikasi:
-node app.js
+### Prerequisites
+- Node.js (v14 atau lebih baru)
+- PostgreSQL/MySQL database
+- Git
 
+### Installation Steps
 
-📄 Dokumentasi API (Swagger)
-Seluruh spesifikasi API tersedia di:
-https://api-doc-tht.nutech-integrasi.com/
+1. **Clone repository:**
+   ```bash
+   git clone https://github.com/<username>/sims-ppob-api.git
+   cd sims-ppob-api
+   ```
 
-Gunakan dokumentasi ini untuk melakukan testing dan validasi API secara end-to-end.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Setup environment variables:**
+   ```bash
+   cp .env.example .env
+   ```
+   Kemudian edit file `.env` sesuai konfigurasi Anda.
+
+4. **Jalankan aplikasi:**
+   ```bash
+   # Development mode
+   npm run dev
+   
+   # Production mode
+   npm start
+   # atau
+   node app.js
+   ```
+
+5. **Akses aplikasi:**
+   ```
+   http://localhost:3000
+   ```
 
